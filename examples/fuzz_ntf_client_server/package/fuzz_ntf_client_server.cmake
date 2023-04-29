@@ -1,0 +1,6 @@
+bde_prefixed_override(fuzz_ntf_client_server application_initialize)
+function(fuzz_ntf_client_server_application_initialize retUor appName)
+    string(REGEX REPLACE "(m_)?(.+)" "\\2" appTrimmedName ${appName})
+    application_initialize_base("" tmpUor ${appTrimmedName})
+    bde_return(${tmpUor})
+endfunction()

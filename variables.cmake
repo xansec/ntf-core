@@ -628,6 +628,18 @@ if (NOT DEFINED NTF_BUILD_WITH_RECURSIVE_MUTEXES)
     endif()
 endif()
 
+if (NOT DEFINED NTF_BUILD_WITH_FUZZERS)
+    if (DEFINED NTF_CONFIGURE_WITH_FUZZERS)
+        set(NTF_BUILD_WITH_FUZZERS
+            ${NTF_CONFIGURE_WITH_FUZZERS} CACHE INTERNAL "")
+    elseif (DEFINED ENV{NTF_CONFIGURE_WITH_FUZZERS})
+        set(NTF_BUILD_WITH_FUZZERS
+            $ENV{NTF_CONFIGURE_WITH_FUZZERS} CACHE INTERNAL "")
+    else()
+        set(NTF_BUILD_WITH_FUZZERS FALSE CACHE INTERNAL "")
+    endif()
+endif()
+
 # Convert NTF_BUILD_* "boolean" variables into 0 or 1 for suitability for
 # use in generating the configuration headers.
 
@@ -905,4 +917,10 @@ if (${NTF_BUILD_WITH_COVERAGE})
     message(STATUS "NTF: Building with coverage:                    yes")
 else()
     message(STATUS "NTF: Building with coverage:                    no")
+endif()
+
+if (${NTF_BUILD_WITH_FUZZERS})
+    message(STATUS "NTF: Building with fuzzers:                    yes")
+else()
+    message(STATUS "NTF: Building with fuzzers:                    no")
 endif()

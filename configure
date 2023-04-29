@@ -512,6 +512,8 @@ while true ; do
             NTF_CONFIGURE_WITH_DOCUMENTATION=1 ; shift ;;
         --with-documentation-internal)
             NTF_CONFIGURE_WITH_DOCUMENTATION_INTERNAL=1 ; shift ;;
+        --with-fuzzers)
+            NTF_CONFIGURE_WITH_FUZZERS=1 ; shift ;;
 
         --without-warnings)
             NTF_CONFIGURE_WITH_WARNINGS=0 ; shift ;;
@@ -692,6 +694,8 @@ export NTF_CONFIGURE_WITH_INTEGRATION_TESTS
 
 export NTF_CONFIGURE_WITH_DOCUMENTATION
 export NTF_CONFIGURE_WITH_DOCUMENTATION_INTERNAL
+
+export NTF_CONFIGURE_WITH_FUZZERS
 
 export NTF_CONFIGURE_FROM_CONTINUOUS_INTEGRATION
 export NTF_CONFIGURE_FROM_PACKAGING

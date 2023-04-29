@@ -896,5 +896,18 @@ if (${NTF_BUILD_WITH_USAGE_EXAMPLES})
     endif()
 endif()
 
-ntf_repository_end()
+if (${NTF_BUILD_WITH_FUZZERS})
+  ntf_executable(
+      NAME
+          fuzz_ntf_client_server
+      PATH
+          examples/fuzz_ntf_client_server
+      REQUIRES
+          nts ntc
+      PRIVATE)
+  ntf_executable_end(NAME fuzz_ntf_client_server)
+endif()
 
+
+
+ntf_repository_end()
