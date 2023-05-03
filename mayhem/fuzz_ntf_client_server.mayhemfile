@@ -1,0 +1,10 @@
+project: ntf-core
+
+# Target name (should be unique within the project)
+target: fuzz-ntf-client-server
+
+# List of commands used to test the target
+cmds:
+
+  - cmd: /bde/ntf-core/bin/fuzz_ntf_client_server
+    libfuzzer: true
