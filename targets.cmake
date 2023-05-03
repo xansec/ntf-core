@@ -897,16 +897,20 @@ if (${NTF_BUILD_WITH_USAGE_EXAMPLES})
 endif()
 
 if (${NTF_BUILD_WITH_FUZZERS})
-  ntf_executable(
-      NAME
-          fuzz_ntf_client_server
-      PATH
-          examples/fuzz_ntf_client_server
-      REQUIRES
-          nts ntc
-      PRIVATE)
-  ntf_target_build_option(TARGET fuzz_ntf_client_server COMPILE LINK VALUE -fsanitize=fuzzer,address)
-  ntf_executable_end(NAME fuzz_ntf_client_server)
+    foreach (suffix ntf_client_server)
+        ntf_executable(
+            NAME
+                fuzz_${suffix}
+            PATH
+                fuzz/fuzz_${suffix}
+            REQUIRES
+                nts ntc
+            PRIVATE)
+        # ntf_target_build_option(TARGET fuzz_ntf_client_server COMPILE LINK VALUE -fsanitize=fuzzer,address)
+        ntf_target_options_fuzz(fuzz_ntf_client_server)
+        ntf_target_options_asan(fuzz_ntf_client_server)
+        ntf_executable_end(NAME fuzz_ntf_client_server)
+    endforeach()
 endif()
 
 
