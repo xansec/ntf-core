@@ -64,6 +64,7 @@ jobs:
       matrix:
         mayhemfile:
           - mayhem/fuzz_ntf_client_server.mayhemfile
+          - mayhem/fuzz_nonblocking_datagram.mayhemfile
 
     steps:
       - uses: actions/checkout@v3
@@ -74,7 +75,7 @@ jobs:
           mayhem-token: ${{ secrets.MAYHEM_TOKEN }}
           args: --image ${{ needs.build.outputs.image }} --file ${{ matrix.mayhemfile }} --duration 300
           sarif-output: sarif
-      
+
       - name: Upload SARIF file(s)
         uses: github/codeql-action/upload-sarif@v2
         with:
