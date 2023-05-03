@@ -1,0 +1,6 @@
+bde_prefixed_override(fuzz_nonblocking_datagram application_initialize)
+function(fuzz_nonblocking_datagram_application_initialize retUor appName)
+    string(REGEX REPLACE "(m_)?(.+)" "\\2" appTrimmedName ${appName})
+    application_initialize_base("" tmpUor ${appTrimmedName})
+    bde_return(${tmpUor})
+endfunction()

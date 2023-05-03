@@ -897,7 +897,7 @@ if (${NTF_BUILD_WITH_USAGE_EXAMPLES})
 endif()
 
 if (${NTF_BUILD_WITH_FUZZERS})
-    foreach (suffix ntf_client_server)
+    foreach (suffix ntf_client_server;nonblocking_datagram)
         ntf_executable(
             NAME
                 fuzz_${suffix}
@@ -906,9 +906,9 @@ if (${NTF_BUILD_WITH_FUZZERS})
             REQUIRES
                 nts ntc
             PRIVATE)
-        ntf_target_options_fuzz(fuzz_ntf_client_server)
-        ntf_target_options_asan(fuzz_ntf_client_server)
-        ntf_executable_end(NAME fuzz_ntf_client_server)
+        ntf_target_options_fuzz(fuzz_${suffix})
+        ntf_target_options_asan(fuzz_${suffix})
+        ntf_executable_end(NAME fuzz_${suffix})
     endforeach()
 endif()
 

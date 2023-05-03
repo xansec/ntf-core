@@ -1,0 +1,10 @@
+project: ntf-core
+
+# Target name (should be unique within the project)
+target: fuzz-nonblocking-datagram
+
+# List of commands used to test the target
+cmds:
+
+  - cmd: /fuzz_nonblocking_datagram
+    libfuzzer: true

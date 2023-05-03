@@ -13,5 +13,9 @@ RUN eval `bbs_build_env -u dbg_64` && bbs_build configure && bbs_build build && 
 RUN mkdir /bde/ntf-core
 WORKDIR /bde/ntf-core
 COPY . .
-RUN ./configure --prefix /bde/bde/_install/opt/bb --compiler "clang" --with-fuzzers --without-warnings-as-errors 
+RUN ./configure --prefix /bde/bde/_install/opt/bb --compiler clang --with-fuzzers --without-warnings-as-errors
 RUN cmake --build .
+
+FROM ubuntu
+
+COPY --from=builder /bde/ntf-core/bin/fuzz_* /
