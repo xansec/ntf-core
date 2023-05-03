@@ -905,6 +905,7 @@ if (${NTF_BUILD_WITH_FUZZERS})
       REQUIRES
           nts ntc
       PRIVATE)
+  ntf_target_build_option(TARGET fuzz_ntf_client_server COMPILE LINK VALUE -fsanitize=fuzzer,address)
   ntf_executable_end(NAME fuzz_ntf_client_server)
 endif()
 
