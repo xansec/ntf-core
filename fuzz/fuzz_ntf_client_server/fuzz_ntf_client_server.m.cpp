@@ -217,14 +217,14 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   error = serverSocket->receive(receiveOptions, receiveCallback);
   //BSLS_ASSERT(!error);
 
-  semaphore.wait();
+  //semaphore.wait();
 
   // Ensure the data received matches the data sent.
 
   //BSLS_ASSERT(bdlbb::BlobUtil::compare(clientData, serverData) == 0);
   if(bdlbb::BlobUtil::compare(clientData, serverData) != 0) std::terminate();
 
-  clientServerTeardown();
+  //clientServerTeardown();
 
   return 0;
 }
