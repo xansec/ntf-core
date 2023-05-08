@@ -134,7 +134,7 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   {
       //char storage = 'S';
 
-      ntsa::Data data(ntsa::ConstBuffer(&data, size);
+      ntsa::Data data(ntsa::ConstBuffer(&data, size));
 
       ntsa::SendContext context;
       ntsa::SendOptions options;
