@@ -20,7 +20,7 @@
 #include <ntsi_listenersocket.h>
 #include <ntsi_streamsocket.h>
 //#include <bsls_assert.h>
-#include <bsls_platform.h>
+//#include <bsls_platform.h>
 
 using namespace BloombergLP;
 
@@ -35,7 +35,7 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
 
   ntsa::Error error;
 
-#if defined(BSLS_PLATFORM_OS_UNIX)
+//#if defined(BSLS_PLATFORM_OS_UNIX)
 
   //
   // PART 1: LISTEN
@@ -216,7 +216,7 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
       //BSLS_ASSERT_OPT(context.bytesReceived() == 0);
   }
 
-#endif
+//#endif
 
   return 0;
 }
