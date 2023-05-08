@@ -17,7 +17,7 @@
 
 #include <ntsf_system.h>
 #include <ntsi_datagramsocket.h>
-#include <bsls_assert.h>
+//#include <bsls_assert.h>
 
 using namespace BloombergLP;
 
@@ -93,7 +93,7 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   // Dequeue incoming data received by the server socket.
 
   {
-      char storage;
+      char storage[size];
 
       ntsa::Data data(ntsa::MutableBuffer(&storage, size));
 
@@ -133,7 +133,7 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   // Dequeue incoming data received by the client socket.
 
   {
-      char storage;
+      char storage[size];
 
       ntsa::Data data(ntsa::MutableBuffer(&storage, size));
 

@@ -897,7 +897,7 @@ if (${NTF_BUILD_WITH_USAGE_EXAMPLES})
 endif()
 
 if (${NTF_BUILD_WITH_FUZZERS})
-    foreach (suffix ntf_client_server;nonblocking_datagram)
+    foreach (suffix ntf_client_server;nonblocking_datagram;nonblocking_unix_stream)
         ntf_executable(
             NAME
                 fuzz_${suffix}
