@@ -72,7 +72,6 @@ if [[ -z "${NTF_CONFIGURE_GENERATOR}" ]]; then
     fi
 fi
 
-NTF_CONFIGURE_COMPILER=""
 NTF_CONFIGURE_SANITIZER=""
 
 if [[ -z "${NTF_CONFIGURE_MULTIPLATFORM}" ]]; then
@@ -290,7 +289,6 @@ usage()
     echo "    --output              <path>       Path to the directory where build artifacts will be staged [${NTF_CONFIGURE_OUTPUT}]"
     echo "    --distribution        <name>       Name of the distribution [${NTF_CONFIGURE_DISTRIBUTION}]"
     echo "    --ufid                <code>       The unified flag identifiers for the build system [${NTF_CONFIGURE_UFID}]"
-    echo "    --compiler            <name>       Compiler name, e.g. \"gcc\", \"clang\", etc."
     echo "    --generator           <name>       CMake generator name: \"Ninja\", \"Unix Makefiles\", \"NMake Makefiles\", or \"msvc\" [\"${NTF_CONFIGURE_GENERATOR}\"]"
     echo "    --sanitizer           <name>       Sanitizer name: \"asan\" (addressability), \"msan\" (uninitialized memory), \"tsan\" (data races), or \"ubsan\" (undefined behavior)"
     echo "    --jobs                <number>     Number of parallel build jobs [${NTF_CONFIGURE_JOBS}]"
@@ -397,8 +395,6 @@ while true ; do
             fi
 
             shift 2 ;;
-        --compiler)
-            NTF_CONFIGURE_COMPILER=$2 ; shift 2 ;;
         --generator)
             NTF_CONFIGURE_GENERATOR=$2 ; shift 2 ;;
         --sanitizer)
@@ -804,9 +800,9 @@ NTF_CONFIGURE_CMAKE_OPTION_UFID=" -DUFID:STRING=${NTF_CONFIGURE_UFID_CANONICAL}"
 
 cd ${NTF_CONFIGURE_OUTPUT}
 
-echo "${NTF_CONFIGURE_CMAKE}${NTF_CONFIGURE_CMAKE_OPTION_DISTRIBUTION_REFROOT}${NTF_CONFIGURE_CMAKE_OPTION_UFID}${NTF_CONFIGURE_CMAKE_OPTION_BUILD_TYPE}${NTF_CONFIGURE_CMAKE_OPTION_INSTALL_PREFIX}${NTF_CONFIGURE_CMAKE_OPTION_VERBOSE_MAKEFILE} -DCMAKE_TOOLCHAIN_FILE:PATH=${NTF_CONFIGURE_REPOSITORY}/toolchain.cmake -G \"${NTF_CONFIGURE_GENERATOR}\" ${NTF_CONFIGURE_REPOSITORY}/CMakeLists.txt"
+echo "${NTF_CONFIGURE_CMAKE}${NTF_CONFIGURE_CMAKE_OPTION_DISTRIBUTION_REFROOT}${NTF_CONFIGURE_CMAKE_OPTION_UFID}${NTF_CONFIGURE_CMAKE_OPTION_BUILD_TYPE}${NTF_CONFIGURE_CMAKE_OPTION_INSTALL_PREFIX}${NTF_CONFIGURE_CMAKE_OPTION_VERBOSE_MAKEFILE} -DCMAKE_TOOLCHAIN_FILE:PATH=${NTF_CONFIGURE_REPOSITORY}/toolchain.cmake -G \"${NTF_CONFIGURE_GENERATOR}\" -S ${NTF_CONFIGURE_REPOSITORY}"
 
-${NTF_CONFIGURE_CMAKE}${NTF_CONFIGURE_CMAKE_OPTION_DISTRIBUTION_REFROOT}${NTF_CONFIGURE_CMAKE_OPTION_UFID}${NTF_CONFIGURE_CMAKE_OPTION_BUILD_TYPE}${NTF_CONFIGURE_CMAKE_OPTION_INSTALL_PREFIX}${NTF_CONFIGURE_CMAKE_OPTION_VERBOSE_MAKEFILE} -DCMAKE_TOOLCHAIN_FILE:PATH=${NTF_CONFIGURE_REPOSITORY}/toolchain.cmake -G "${NTF_CONFIGURE_GENERATOR}" ${NTF_CONFIGURE_REPOSITORY}/CMakeLists.txt 2>&1 | tee -a ${NTF_CONFIGURE_LOG_PREFIX}configure.log
+${NTF_CONFIGURE_CMAKE}${NTF_CONFIGURE_CMAKE_OPTION_DISTRIBUTION_REFROOT}${NTF_CONFIGURE_CMAKE_OPTION_UFID}${NTF_CONFIGURE_CMAKE_OPTION_BUILD_TYPE}${NTF_CONFIGURE_CMAKE_OPTION_INSTALL_PREFIX}${NTF_CONFIGURE_CMAKE_OPTION_VERBOSE_MAKEFILE} -DCMAKE_TOOLCHAIN_FILE:PATH=${NTF_CONFIGURE_REPOSITORY}/toolchain.cmake -G "${NTF_CONFIGURE_GENERATOR}" -S ${NTF_CONFIGURE_REPOSITORY} 2>&1 | tee -a ${NTF_CONFIGURE_LOG_PREFIX}configure.log
 if [ ${?} -ne 0 ]; then
     echo "Failed to configure"
     exit 1
