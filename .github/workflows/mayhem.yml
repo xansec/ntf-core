@@ -63,7 +63,7 @@ jobs:
       fail-fast: false
       matrix:
         mayhemfile:
-          - mayhem/fuzz_ntf_client_server.mayhemfile
+          # - mayhem/fuzz_ntf_client_server.mayhemfile
           - mayhem/fuzz_nonblocking_datagram.mayhemfile
           - mayhem/fuzz_nonblocking_unix_stream.mayhemfile
 

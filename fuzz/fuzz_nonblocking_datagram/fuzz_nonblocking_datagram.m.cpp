@@ -78,13 +78,13 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   {
       //char storage = 'C';
 
-      ntsa::Data data(ntsa::ConstBuffer(&data, size));
+      ntsa::Data ntsa_data(ntsa::ConstBuffer(data, size));
 
       ntsa::SendContext context;
       ntsa::SendOptions options;
       options.setEndpoint(serverEndpoint);
 
-      error = client->send(&context, data, options);
+      error = client->send(&context, ntsa_data, options);
       //BSLS_ASSERT_OPT(!error);
 
       //BSLS_ASSERT_OPT(context.bytesSent() == 1);
@@ -95,13 +95,13 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   {
       char storage[size];
 
-      ntsa::Data data(ntsa::MutableBuffer(&storage, size));
+      ntsa::Data ntsa_data(ntsa::MutableBuffer(&storage, size));
 
       ntsa::ReceiveContext context;
       ntsa::ReceiveOptions options;
       options.showEndpoint();
 
-      error = server->receive(&context, &data, options);
+      error = server->receive(&context, &ntsa_data, options);
       //BSLS_ASSERT_OPT(!error);
 
       //BSLS_ASSERT_OPT(context.endpoint().value() == clientEndpoint);
@@ -118,13 +118,13 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   {
       //char storage = 'S';
 
-      ntsa::Data data(ntsa::ConstBuffer(&data, size));
+      ntsa::Data ntsa_data(ntsa::ConstBuffer(data, size));
 
       ntsa::SendContext context;
       ntsa::SendOptions options;
       options.setEndpoint(clientEndpoint);
 
-      error = server->send(&context, data, options);
+      error = server->send(&context, ntsa_data, options);
       //BSLS_ASSERT_OPT(!error);
 
       //BSLS_ASSERT_OPT(context.bytesSent() == 1);
@@ -135,13 +135,13 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   {
       char storage[size];
 
-      ntsa::Data data(ntsa::MutableBuffer(&storage, size));
+      ntsa::Data ntsa_data(ntsa::MutableBuffer(&storage, size));
 
       ntsa::ReceiveContext context;
       ntsa::ReceiveOptions options;
       options.showEndpoint();
 
-      error = client->receive(&context, &data, options);
+      error = client->receive(&context, &ntsa_data, options);
       //BSLS_ASSERT_OPT(!error);
 
       //BSLS_ASSERT_OPT(context.endpoint().value() == serverEndpoint);
