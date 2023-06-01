@@ -113,7 +113,7 @@ extern "C" int LLVMFuzzerTestOneInput(const char *data, size_t size)
   {
       char storage[size];
 
-      ntsa::Data nsta_data(ntsa::MutableBuffer(&storage, size));
+      ntsa::Data ntsa_data(ntsa::MutableBuffer(&storage, size));
 
       ntsa::ReceiveContext context;
       ntsa::ReceiveOptions options;

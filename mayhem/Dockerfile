@@ -14,8 +14,8 @@ RUN mkdir /bde/ntf-core
 WORKDIR /bde/ntf-core
 COPY . .
 RUN ./configure --prefix /bde/bde/_install/opt/bb --with-fuzzers --without-warnings-as-errors
-RUN cmake --build .
+RUN make
 
 FROM ubuntu
 
-COPY --from=builder /bde/ntf-core/bin/fuzz_* /
+COPY --from=builder /bde/ntf-core/build/Linux/opt_dbg_exc_mt_64/bin/fuzz_* /
